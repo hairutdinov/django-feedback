@@ -9,6 +9,7 @@
 </head>
 <body>
     <form action="{% url 'review' %}" method="POST">
+        {% csrf_token %}
         <p>
             <label for="username">Your name</label>
             <input type="text" id="username" name="username">
