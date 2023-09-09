@@ -40,11 +40,6 @@ class ReviewsListView(ListView):
     model = Review
     context_object_name = 'reviews'  # by default: object_list
 
-    # def get_queryset(self):
-    #     base_query = super().get_queryset()
-    #     data = base_query.filter(rating__gt=2)
-    #     return data
-
 
 class ReviewDetailView(DetailView):
     template_name = 'reviews/review-detail.html'
