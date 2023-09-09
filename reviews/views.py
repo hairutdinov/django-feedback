@@ -4,6 +4,7 @@ from django.urls import reverse
 from .forms import ReviewForm
 from django.views import View
 from django.views.generic.base import TemplateView
+from django.views.generic import ListView
 from .models import Review
 
 
@@ -34,13 +35,15 @@ class ThankYouView(TemplateView):
         return context
 
 
-class ReviewsListView(TemplateView):
+class ReviewsListView(ListView):
     template_name = 'reviews/review_list.html'
+    model = Review
+    context_object_name = 'reviews'  # by default: object_list
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['reviews'] = Review.objects.all()
-        return context
+    # def get_queryset(self):
+    #     base_query = super().get_queryset()
+    #     data = base_query.filter(rating__gt=2)
+    #     return data
 
 
 class ReviewDetailView(TemplateView):
