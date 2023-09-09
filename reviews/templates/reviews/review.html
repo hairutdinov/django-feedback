@@ -1,22 +1,16 @@
+{% extends 'reviews/base.html' %}
 {% load static %}
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'reviews/styles.css'%}">
-    <title>Document</title>
-</head>
-<body>
-    <form action="{% url 'review' %}" method="POST">
-        {% csrf_token %}
-        {% for field in form %}
-            {% include 'reviews/includes/form_field.html' %}
-        {% endfor %}
-        <button>Send</button>
-    </form>
-</body>
-</html>
+{% block title %}
+    Feedback
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'review' %}" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+        {% include 'reviews/includes/form_field.html' %}
+    {% endfor %}
+    <button>Send</button>
+</form>
+{% endblock %}
