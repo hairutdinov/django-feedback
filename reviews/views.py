@@ -2,20 +2,25 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from .forms import ReviewForm
+from django.views import View
 
 
-def review(request):
-    form = ReviewForm()
+class ReviewView(View):
+    def get(self, request):
+        form = ReviewForm()
+        return render(request, 'reviews/review.html', {
+            "form": form
+        })
 
-    if request.method == 'POST':
+    def post(self, request):
         form = ReviewForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('thank-you'))
 
-    return render(request, 'reviews/review.html', {
-        "form": form
-    })
+        return render(request, 'reviews/review.html', {
+            "form": form
+        })
 
 
 def thank_you(request):
